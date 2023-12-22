@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constant.dart';
@@ -9,27 +10,23 @@ class ThemeProvider with ChangeNotifier {
 
   ThemeProvider({required this.isLightTheme});
 
-    getCurrentNavigationColor() {
+  getCurrentNavigationColor() {
     if (isLightTheme) {
-      SystemChrome.setSystemUIOverlayStyle(
-          const SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.light,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: Colors.white,
-            systemNavigationBarIconBrightness: Brightness.dark,
-          )
-      );
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ));
     } else {
-      SystemChrome.setSystemUIOverlayStyle(
-          const SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.light,
-            systemNavigationBarColor: Colors.black,
-            systemNavigationBarIconBrightness: Brightness.light,
-          )
-      );
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.black,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ));
     }
   }
 
@@ -39,33 +36,40 @@ class ThemeProvider with ChangeNotifier {
       sharedPreferences.setBool(SPref.isLight, false);
       isLightTheme = !isLightTheme;
       notifyListeners();
-    }
-    else {
+    } else {
       sharedPreferences.setBool(SPref.isLight, true);
       isLightTheme = !isLightTheme;
       notifyListeners();
-  }
+    }
     getCurrentNavigationColor();
     notifyListeners();
   }
 
   ThemeData themeData() {
     return ThemeData(
-      brightness: isLightTheme ? Brightness.light : Brightness.dark,
-      scaffoldBackgroundColor: isLightTheme ? Colors.deepOrangeAccent : Colors
-          .black,
-    );
+        brightness: isLightTheme ? Brightness.light : Brightness.dark,
+        scaffoldBackgroundColor:
+            isLightTheme ? Colors.deepOrangeAccent : Colors.black,
+        textTheme: TextTheme(
+            displayLarge: GoogleFonts.stickNoBills(
+                fontSize: 70,
+                fontWeight: FontWeight.w600,
+                color: isLightTheme ? AppColors.black : AppColors.orange),
+            displayMedium: GoogleFonts.robotoCondensed(
+              fontWeight: FontWeight.w500,
+              color: isLightTheme ? AppColors.black : AppColors.orange,
+            )));
   }
 
   ThemeMode themeMode() {
     return ThemeMode(
-      gradientColors: isLightTheme ? [Colors.deepOrange, Colors.orange] : [
-        Colors.black,
-        Colors.black
-      ],
+      gradientColors: isLightTheme
+          ? [Colors.deepOrange, Colors.orange]
+          : [Colors.black, Colors.black],
       switchColor: isLightTheme ? Colors.black : Colors.deepOrange,
-      switchBgColor: isLightTheme ? Colors.black.withOpacity(.1) : Colors.grey
-          .withOpacity(.3),
+      switchBgColor: isLightTheme
+          ? Colors.black.withOpacity(.1)
+          : Colors.grey.withOpacity(.3),
       thumbColor: isLightTheme ? Colors.deepOrange : Colors.black,
     );
   }
@@ -77,6 +81,10 @@ class ThemeMode {
   Color? thumbColor;
   Color? switchBgColor;
 
-  ThemeMode(
-      {this.gradientColors, this.switchColor, this.thumbColor, this.switchBgColor,});
+  ThemeMode({
+    this.gradientColors,
+    this.switchColor,
+    this.thumbColor,
+    this.switchBgColor,
+  });
 }
