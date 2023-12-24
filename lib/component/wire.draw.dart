@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Wire extends StatefulWidget {
-  const Wire({super.key});
+  const Wire({super.key, required this.initialPosition, required this.todoOffset});
 final Offset initialPosition;
 final Offset todoOffset;
   @override
