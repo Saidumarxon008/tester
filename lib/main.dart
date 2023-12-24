@@ -6,40 +6,42 @@ import 'package:tester/homepage.dart';
 import 'package:tester/theme/constant.dart';
 import 'package:tester/theme/theme.dart';
 
-void main() async{
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs=await SharedPreferences.getInstance();
-  bool isLightTheme = prefs.getBool(SPref.isLight)?? true;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLightTheme = prefs.getBool(SPref.isLight) ?? true;
   runApp(
-     AppStart(isLightTeme: isLightTheme,),
+    AppStart(isLightTeme: isLightTheme,),
   );
 }
 
 class AppStart extends StatelessWidget {
-  const AppStart({super.key,required this.isLightTeme});
+  const AppStart({super.key, required this.isLightTeme});
+
   final bool isLightTeme;
 
   @override
   Widget build(BuildContext context) {
-return MultiProvider(providers: [
-  ChangeNotifierProvider(create: (_)=>ThemeProvider(isLightTheme: isLightTeme),),
-],
-child: const MyApp());
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (_) => ThemeProvider(isLightTheme: isLightTeme),),
+    ],
+        child: const MyApp());
   }
 }
-class MyApp extends StatelessWidget{
+
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider=Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return ScreenUtilInit(
         designSize: const Size(360, 800),
-        minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo', debugShowCheckedModeBanner: false,
             theme: themeProvider.themeData(),
             home: const HomePage(),
           );
