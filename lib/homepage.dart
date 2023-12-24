@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:tester/theme/constant.dart';
 import 'package:tester/theme/theme.dart';
 
+import 'component/wire.draw.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,15 +23,13 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     final Size size = MediaQuery.of(context).size;
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-
     initialPosition = Offset(size.width = .9, 0);
     containerPosition = Offset(size.width = .9, size.height = .4);
     finalPosition = Offset(size.width = .9, size.height = .5 - size.width * .1);
-    if(themeProvider.isLightTheme){
-      switchPosition=containerPosition;
-    }
-    else{
-      switchPosition=finalPosition;
+    if (themeProvider.isLightTheme) {
+      switchPosition = containerPosition;
+    } else {
+      switchPosition = finalPosition;
     }
     super.didChangeDependencies();
   }
@@ -136,16 +136,46 @@ class _HomePageState extends State<HomePage> {
               top: containerPosition.dy - size.width * .1 / 2 - 5,
               left: containerPosition.dx - size.width * .1 / 2 - 5,
               child: Container(
-                width: size.width*.1+10,
-                height: size.height*.1+10,
+                width: size.width * .1 + 10,
+                height: size.height * .1 + 10,
                 decoration: BoxDecoration(
                   color: themeProvider.themeMode().switchBgColor,
                   borderRadius: BorderRadius.circular(30),
                 ),
               )),
           Wire(
-            initialPosition:initialPosition,
-            toOffset:switchPosition,
+            initialPosition: initialPosition,
+            toOffset: switchPosition,
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 0),
+            top: switchPosition.dy - size.width * .1,
+            left: switchPosition.dy - size.width * .1,
+            child: Draggable(
+              feedback: Container(
+                width: size.width * .1,
+                height: size.width * .1,
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+              ),
+              onDragUpdate: (details){
+                setState(() {
+                  switchPosition=details.localPosition;
+                });
+              },
+              child: Container(
+                width: size.width * .1,
+                height: size.width * .1,
+                decoration: BoxDecoration(
+                    color: themeProvider.themeMode().thumbColor,
+                    border: Border.all(
+                      width: 5,
+                      color: themeProvider.themeMode().switchColor!,
+                    ),shape: BoxShape.circle,),
+              ),
+            ),
           )
         ]),
       ),
