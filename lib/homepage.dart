@@ -122,40 +122,6 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(30),
                 ),
               )),
-          Wire(
-            initialPosition: initialPosition,
-            toOffset: switchPosition,
-          ),
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 0),
-            top: switchPosition.dy - size.width * .1,
-            left: switchPosition.dy - size.width * .1,
-            child: Draggable(
-              feedback: Container(
-                width: size.width * .1,
-                height: size.width * .1,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              onDragUpdate: (details){
-                setState(() {
-                  switchPosition=details.localPosition;
-                });
-              },
-              child: Container(
-                width: size.width * .1,
-                height: size.width * .1,
-                decoration: BoxDecoration(
-                  color: themeProvider.themeMode().thumbColor,
-                  border: Border.all(
-                    width: 5,
-                    color: themeProvider.themeMode().switchColor!,
-                  ),shape: BoxShape.circle,),
-              ),
-            ),
-          )
         ]),
       ),
     );
