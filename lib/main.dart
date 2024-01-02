@@ -6,7 +6,7 @@ import 'package:tester/homepage.dart';
 import 'package:tester/theme/constant.dart';
 import 'package:tester/theme/theme.dart';
 
-main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isLightTheme = prefs.getBool(SPref.isLight) ?? true;

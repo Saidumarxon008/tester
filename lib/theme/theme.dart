@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import 'constant.dart';
 
@@ -49,7 +50,7 @@ class ThemeProvider with ChangeNotifier {
     return ThemeData(
         brightness: isLightTheme ? Brightness.light : Brightness.dark,
         scaffoldBackgroundColor:
-        isLightTheme ? Colors.deepOrangeAccent : Colors.black,
+            isLightTheme ? Colors.deepOrangeAccent : Colors.black,
         textTheme: TextTheme(
             displayLarge: GoogleFonts.stickNoBills(
                 fontSize: 70,
@@ -58,7 +59,13 @@ class ThemeProvider with ChangeNotifier {
             displayMedium: GoogleFonts.robotoCondensed(
               fontWeight: FontWeight.w500,
               color: isLightTheme ? AppColors.black : AppColors.orange,
-            )));
+            )),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: isLightTheme ? AppColors.black : AppColors.orange,
+        ),
+        iconTheme: IconThemeData(
+          color: isLightTheme ? AppColors.black : AppColors.orange,
+        ));
   }
 
   ThemeMode themeMode() {
