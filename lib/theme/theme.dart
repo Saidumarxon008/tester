@@ -49,7 +49,7 @@ class ThemeProvider with ChangeNotifier {
     return ThemeData(
         brightness: isLightTheme ? Brightness.light : Brightness.dark,
         scaffoldBackgroundColor:
-            isLightTheme ? Colors.deepOrangeAccent : Colors.black,
+        isLightTheme ? Colors.deepOrangeAccent : Colors.black,
         textTheme: TextTheme(
             displayLarge: GoogleFonts.stickNoBills(
                 fontSize: 70,

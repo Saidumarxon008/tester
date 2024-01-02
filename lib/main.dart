@@ -11,7 +11,9 @@ main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isLightTheme = prefs.getBool(SPref.isLight) ?? true;
   runApp(
-    AppStart(isLightTeme: isLightTheme,),
+    AppStart(
+      isLightTeme: isLightTheme,
+    ),
   );
 }
 
@@ -24,9 +26,9 @@ class AppStart extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(
-        create: (_) => ThemeProvider(isLightTheme: isLightTeme),),
-    ],
-        child: const MyApp());
+        create: (_) => ThemeProvider(isLightTheme: isLightTeme),
+      ),
+    ], child: const MyApp());
   }
 }
 
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp(
-            title: 'Flutter Demo', debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false,
             theme: themeProvider.themeData(),
             home: const HomePage(),
           );
