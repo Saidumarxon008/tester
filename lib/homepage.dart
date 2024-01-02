@@ -111,17 +111,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               )),
-          Positioned(
-              top: containerPosition.dy - size.width * .1 / 2 - 5,
-              left: containerPosition.dx - size.width * .1 / 2 - 5,
-              child: Container(
-                width: size.width * .1 + 10,
-                height: size.height * .1 + 10,
-                decoration: BoxDecoration(
-                  color: themeProvider.themeMode().switchBgColor,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              )),
         ]),
       ),
     );
