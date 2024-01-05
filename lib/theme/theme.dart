@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import 'constant.dart';
 
@@ -14,7 +13,7 @@ class ThemeProvider with ChangeNotifier {
   getCurrentNavigationColor() {
     if (isLightTheme) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: Colors.deepOrange,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: Colors.white,
@@ -22,7 +21,7 @@ class ThemeProvider with ChangeNotifier {
       ));
     } else {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: Colors.black,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.light,
         systemNavigationBarColor: Colors.black,
